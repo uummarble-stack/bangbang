@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Mini Telegram Saya</title>
+    <!-- Script resmi Telegram Web App -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            /* Mengikuti warna tema otomatis dari Telegram (Dark/Light mode) */
+            background-color: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
+        }
+        button {
+            background-color: var(--tg-theme-button-color, #2481cc);
+            color: var(--tg-theme-button-text-color, #ffffff);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="welcome">Halo!</h1>
+    <p id="user-info">Memuat data pengguna...</p>
+    
+    <button onclick="kirimNotif()">Tekan Tombol Ini</button>
+
+    <script>
+        // Inisialisasi Telegram Web App
+        let tg = window.Telegram.WebApp;
+        tg.expand(); // Membuka aplikasi secara full screen di Telegram
+
+        // Mengambil data pengguna Telegram yang sedang login
+        let user = tg.initDataUnsafe.user;
+        if (user) {
+            document.getElementById('welcome').innerText = `Halo, ${user.first_name}!`;
+            document.getElementById('user-info').innerText = `Username Anda: @${user.username || 'Tidak ada'}`;
+        }
+
+        function kirimNotif() {
+            tg.showAlert('Berhasil! Aplikasi Anda terhubung dengan mulus di dalam Telegram.');
+        }
+    </script>
+
+</body>
+</html>
